@@ -1,5 +1,4 @@
 # 3.6.1 - Promises
-
 ---
 ## Review
 
@@ -12,11 +11,11 @@
 
 ---
 
-- Node was designed to be able to process many concurrent requests at the same time.
+- Node was designed to be able to process many requests (ex: browser requesting a page)
 - This is done by running code in a single thread.
-- It creates a separate thread for anything I/O.
+- It creates a separate thread for anything I/O. (I/O means Input / Output)
     - read/write to disk
-    - send/receive from the network
+    - send/receive from the network (get/post requests in express terminology)
     - get user input from the keyboard
 
 ---
@@ -30,7 +29,7 @@ _The separate threads are completely inaccessible to JavaScript._
 
 ### the Call Stack
 
-- When calling a function, JS suspends the currently running code and "jump" to the code of the function.
+- When calling a function, JS suspends the currently running code and "jumps" to the code of the function.
 - When a `return` statement is encountered, JS needs to know where to _return_ to.
 - JS keeps track of this in the call stack.
 
@@ -83,24 +82,16 @@ _Where is there a potential problem?_
 
 #### The Node solution
 
-- Any I/O functions are made _asynchronous_
-- Node uses a separate _thread_ under its control to do the I/O
-- The I/O function will **not `return` anything**
-- Instead, the I/O function will take an additional parameter, a callback.
-- Node will register the callback function in its memory, and will call it back **later. When the database response comes back**.
-- We say that Node will call the callback function **asynchronously**.
+- Node has a solution that is similar to how we deal with event handlers
+- This pattern is called a callback
+- When a function goes and gets information, we attach a function to it 
+- node takes this function and knows it will execute it later when the information is back
+- This leads to a pattern that most developers don't like... Callback hell...
 
 ---
 
-### The Asynchronous headache
 
-- Since asynchronous functions return immediately, they don't have time to know if an error will occur.
-- If any errors occur, they would be in the separate I/O thread which is under Node's control
-- Among other things, this means that async errors can't bubble up the call stack because there is no call stack anymore when the data comes back
-
----
-
-### Node solves this! (sort of)
+### Call backs
 
 - By convention, all async functions will accept a callback as their **last argument**
 - Async functions will call the provided callback _only once_
@@ -138,18 +129,19 @@ The previous code contains a mix of synchronous (`JSON.parse`) and asynchronous 
 
 ---
 
-This mix of code styles has some drawbacks:
+Callback hell:
 
 - It is confusing because we can't easily know if a function is sync or async
-- It forces us to manually bubble up errors
+- The code quickly becomes spaghetti. Code should be a lasagna...
 - It forces us to create awkward functions that have parameters that are not theirs -- `callback` for the async functions, and `err` for the callback
 
 ---
 
 ## `Promise`s: a solution to some of Node-style callbacks problems
 
-- `Promise`s have as their goal to make it easier to write asynchronous code
-- They are simply a clever code device to straighten up callback-based code
+- `Promise`s are an attempt at making our lives easier as developers
+- Under the hood Node will execute your code the same way but Promises give us a easier time at understanding what will happen
+- Cooking time example...
 
 ---
 
@@ -214,12 +206,6 @@ fs.readFile("file.json")
 - chaining takes care of nested callbacks.
 - By separating the success and error callbacks, we can more easily reuse functions like `JSON.parse`
 - We don't have to bubble up errors manually anymore
-
----
-
-- We will use Promises over Node-style callbacks wherever possible.
-
-_Most popular NPM libraries will have a Promise-based equivalent_
 
 ---
 
