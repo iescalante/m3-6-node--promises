@@ -35,10 +35,24 @@ const arrayOfWords = ['cucumber', 'tomatos', 'avocado']
 const complicatedArray = ['cucumber', 44, true]
   
 const makeAllCaps = (array) => {
-    
-}
+    return new Promise((resolve, reject) => {
 
+        if(array.every(word => typeof word === "string")) {
+            resolve(array.map(word => word.toUpperCase()))
+        } else {
+            reject('Oh no, not all the items are strings :(')
+        }
+    })    
+}
 const sortWords = (array) => {
+    return new Promise((resolve, reject) => {
+
+        if(array.every(word => typeof word === "string")) {
+            resolve(array.sort())
+        } else {
+            reject('Oops, something went wrong >.<')
+        }
+    })
     
 } 
 
