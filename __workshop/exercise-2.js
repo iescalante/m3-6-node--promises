@@ -35,7 +35,10 @@ function getAddressPosition(address) {
       });
 }
 
-getAddressPosition('1455 Boulevard de Maisonneuve O, Montréal, QC H3G 1M8');
+getAddressPosition('Sint-Bavostraat 78 2610 Antwerpen Wilrijk Belgium'); //Histogenex
+getAddressPosition('JR Shinjuku Miraina Tower, 23F 4-1-6 Shinjuku, Shinjuku-ku, Tokyo 160-0022 '); //JR Line HQ in Japan
+getAddressPosition('2000 McGill College Ave, Montreal, Quebec H3A 3H3'); // Microsoft office in MTL
+getAddressPosition('1 Chome-1-83 Shimorenjaku, Mitaka, Tokyo 181-0013, Japan'); // Studio Ghibli HQ in Japan
 
 
 
