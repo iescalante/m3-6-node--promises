@@ -27,6 +27,10 @@ function getIssPosition() {
 }
 
 getIssPosition();
+
+module.exports = {
+    getIssPosition,
+}
 /*var options = {
     uri: 'http://api.open-notify.org/iss-now.json',
     json: true // Automatically parses the JSON string in the response
