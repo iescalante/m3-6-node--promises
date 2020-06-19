@@ -12,7 +12,7 @@ function getDistance(pos1, pos2) {
     return Math.sqrt(Math.pow(pos1.lat - pos2.lat, 2) + Math.pow(pos1.lng - pos2.lng, 2));
 }
 
-function getIssPosition(lat, lng) {
+function getIssPosition() {
     return rp('http://api.open-notify.org/iss-now.json')
     .then(response => {
         const issPosition = JSON.parse(response);
@@ -61,23 +61,8 @@ function getAddressPosition(address) {
 }
 
 function getDistanceFromIss(address) {
-    return rp('http://api.open-notify.org/iss-now.json')
-    .then(response => {
-        const issPosition = JSON.parse(response);
 
-        return {
-            lat: issPosition.iss_position.latitude,
-            lng: issPosition.iss_position.longitude,
-        }
-    })
-    .then(data => {
-        console.log(data);
-        return data;
-    })
-    
     
 }
 
 
-
-//console.log(object1);
