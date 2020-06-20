@@ -1,49 +1,48 @@
 const inquirer = require('inquirer');
-// const hiddenNumber = (Math.round(Math.random()*100));
-const hiddenNumber = 10;
+const hiddenNumber = (Math.round(Math.random()*10));
+console.log(hiddenNumber);
+let tries = 5;
 
-console.log('Guess the number from 1 to 100! You have 5 guesses.');
+const output = [];
 
-const requireNumber = value => {
-    if (value === hiddenNumber) {
-      return true;
+const question = {
+    type: 'input',
+    name:'guess',
+    message: 'What is the number from 1 to 10?',
+};
+
+
+
+
+function ask() {
+    console.log(`Guess the number from 1-10. You have ${tries} tries`);
+    
+    if (tries < 6) {
+        inquirer.prompt(question).then(answer => {
+            if (answer > 10 || answer < 0) {
+                console.log('Come on, follow the rules now :)');
+                tries--;
+                guessNumber();
+            }
+            else if (answer > hiddenNumber) {
+                console.log('Too high! Try again!');
+                tries--;
+                guessNumber();
+            }
+            else if (answer < hiddenNumber) {
+                console.log('Too low! Try again!');
+                tries--;
+                guessNumber();
+
+            } else {
+                console.log('You did it! Congrats!');
+            }
+
+        })
+    } else if (tries === 0) {
+        console.log('Sorry! Out of tries :(');
     }
-  
-    return 'Try again';
-  };
-  
-  inquirer
-    .prompt([
-      {
-        type: 'number',
-        message: 'Guess the number, first try',
-        name: 'try 1',
-        validate: requireNumber
-      },
-      {
-        type: 'number',
-        message: 'Guess the number, second try',
-        name: 'try 2',
-        validate: requireNumber
-      },
-      {
-        type: 'number',
-        message: 'Guess the number, third try',
-        name: 'try 3',
-        validate: requireNumber
-      },
-      {
-        type: 'number',
-        message: 'Guess the number, fourth try',
-        name: 'try 4',
-        validate: requireNumber
-      },
-      {
-        type: 'number',
-        message: 'Guess the number, fifth try',
-        name: 'try 5',
-        validate: requireNumber
-      },
-      
-    ])
-    .then(answers => console.log(JSON.stringify(answers, null, '  ')));
+}
+
+ask();
+
