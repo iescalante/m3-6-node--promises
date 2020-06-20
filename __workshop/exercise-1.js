@@ -19,14 +19,9 @@ function getIssPosition() {
             lng: issPosition.iss_position.longitude,
         }
     })
-    .then(data => {
-        console.log(data);
-        return data;
-    })
-    .catch(err => console.log('OOPS!', err));
 }
 
-getIssPosition();
+getIssPosition().then((result => console.log(result)));
 
 module.exports = {
     getIssPosition,

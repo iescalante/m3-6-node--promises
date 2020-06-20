@@ -64,5 +64,7 @@ function getDistanceFromIss(address) {
 
     
 }
-
-
+getIssPosition();
+getAddressPosition('4095 Cote-des-neiges Rd Montreal H3H 1W9');
+console.log(typeof getIssPosition);
+console.log(typeof getAddressPosition);
