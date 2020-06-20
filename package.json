@@ -5,6 +5,7 @@
     "author": "Scott Morin <scott@journeyedu.co>",
     "license": "MIT",
     "dependencies": {
+        "dark-sky": "^1.1.5",
         "dotenv": "^8.2.0",
         "nodemon": "^2.0.2",
         "opencage-api-client": "^0.7.1",
